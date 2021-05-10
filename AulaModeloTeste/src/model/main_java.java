@@ -1,6 +1,6 @@
 package model;
 
-public abstract class main_java {
+public class main_java {
 
 	public static void main(String[] args) {
 
