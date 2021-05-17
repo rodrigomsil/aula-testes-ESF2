@@ -4,6 +4,7 @@ package Testes.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 
@@ -119,11 +120,9 @@ public class AvaliadorTest {
 	public void deveEncontrarMaioresLancesListaVazia() {
 
 				//execução
-				leiloeiro.avalia(leilao);
-				
-				//avaliação
-				List<Lance> maiores = leiloeiro.getTresMaiores();
-				assertEquals(0, maiores.size());
+				Avaliador leiloeiro = new Avaliador();
+				assertThrows(RuntimeException.class,
+						()->leiloeiro.avalia(leilao));
 	}
 	
 	@Test
@@ -139,19 +138,6 @@ public class AvaliadorTest {
 		assertEquals(1, maiores.size());
 		assertEquals(400, maiores.get(0).getValor(), 0.00001);
 	}
-	
-	@Test
-	public void naoDeveAvaliarLeiloesSemNenhumLanceDado() {
-
-		try {
-				leiloeiro.avalia(leilao);
-			} catch (Exception e) {
-				// tudo ok;
-			}
-	}
-	
-	
-	
 	
 	
 }
