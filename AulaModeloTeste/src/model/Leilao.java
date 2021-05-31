@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Leilao {
 	
+	public static final int LIMITELANCES  = 5;
+	
 	private String nome;
 	private Double valorInicial = 0.0;
 	private Usuario usuario;
@@ -67,8 +69,30 @@ public class Leilao {
 		this.lances = lances;
 	}
 
-	public void propoe(Lance lance) {
-		lances.add(lance);		
+	public Lance ultimoLanceDado() {
+		return lances.get(lances.size() - 1);
 	}
+	
+	
+	//codigo com tdd
+	public void propoe(Lance lance) {
+		if (lances.isEmpty() || (!ultimoLanceDado().getUsuario().equals(lance.getUsuario())
+		&& qtdDelancesDo(lance.getUsuario()) < LIMITELANCES)) {
+
+		lances.add(lance);
+
+		}
+		}
+	
+	private int qtdDelancesDo(Usuario usuario) {
+		int total = 0;
+		for (Lance lance : lances) {
+		if (lance.getUsuario().equals(usuario))
+
+		total++;
+
+		}
+		return total;
+		}
 
 }
